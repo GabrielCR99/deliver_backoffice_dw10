@@ -1,0 +1,52 @@
+name: delivery_backoffice_dw10
+description: A new Flutter project.
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.19.6 <3.0.0"
+
+dependencies:
+  awesome_snackbar_content: ^0.1.3
+  cupertino_icons: ^1.0.2
+  dio: ^5.1.2
+  flutter:
+    sdk: flutter
+  flutter_dotenv: ^5.0.2
+  flutter_mobx: ^2.0.6+5
+  flutter_modular: ^5.0.3
+  loading_animation_widget: ^1.2.0+4
+  mobx: ^2.2.0
+  url_strategy: ^0.2.0
+  validatorless: ^1.2.3
+
+dev_dependencies:
+  build_runner: ^2.3.3
+  dart_code_metrics: ^5.7.3
+  flutter_test:
+    sdk: flutter
+  mobx_codegen: ^2.2.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - .env
+    - assets/images/
+    - assets/images/icons/
+
+  fonts:
+    - family: mplus1
+      fonts:
+        - asset: assets/fonts/MPLUS1p-Light.ttf
+          weight: 300
+        - asset: assets/fonts/MPLUS1p-Regular.ttf
+          style: normal
+        - asset: assets/fonts/MPLUS1p-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/MPLUS1p-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/MPLUS1p-ExtraBold.ttf
+          weight: 800
