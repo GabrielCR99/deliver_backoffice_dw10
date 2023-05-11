@@ -7,7 +7,7 @@ import '../../services/auth/login_service_impl.dart';
 import 'login_controller.dart';
 import 'login_page.dart';
 
-class LoginModule extends Module {
+final class LoginModule extends Module {
   @override
   List<Bind> get binds => [
         Bind.lazySingleton<AuthRepository>((i) => AuthRepositoryImpl(dio: i())),

@@ -18,7 +18,7 @@ final _theme = ThemeData(
     enabledBorder: _defaultInputBorder,
     border: _defaultInputBorder,
   ),
-  useMaterial3: true,
+  // useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
     seedColor: AppColors.instance.primaryColor,
     primary: AppColors.instance.primaryColor,

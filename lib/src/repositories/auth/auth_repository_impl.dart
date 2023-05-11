@@ -10,7 +10,7 @@ import '../../models/auth_model.dart';
 import 'auth_repository.dart';
 
 @immutable
-class AuthRepositoryImpl implements AuthRepository {
+final class AuthRepositoryImpl implements AuthRepository {
   final CustomDio _dio;
 
   const AuthRepositoryImpl({required CustomDio dio}) : _dio = dio;

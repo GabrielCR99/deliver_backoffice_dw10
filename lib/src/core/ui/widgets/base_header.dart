@@ -4,7 +4,7 @@ import '../styles/text_styles.dart';
 
 class BaseHeader extends StatelessWidget {
   final String title;
-  final ValueChanged<String> onSearch;
+  final ValueChanged<String>? onSearch;
   final String buttonLabel;
   final VoidCallback onButtonTap;
   final bool showAddButton;

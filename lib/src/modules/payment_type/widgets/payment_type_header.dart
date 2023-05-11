@@ -24,9 +24,9 @@ class _PaymentTypeHeaderState extends State<PaymentTypeHeader> {
       onButtonTap: widget.controller.addPayment,
       filterWidget: DropdownButton<bool>(
         items: const [
-          DropdownMenuItem(value: true, child: Text('Todos')),
+          DropdownMenuItem(child: Text('Todos')),
+          DropdownMenuItem(value: true, child: Text('Ativo')),
           DropdownMenuItem(value: false, child: Text('Inativo')),
-          DropdownMenuItem(child: Text('Ativo')),
         ],
         value: enabled,
         onChanged: (value) => setState(() {

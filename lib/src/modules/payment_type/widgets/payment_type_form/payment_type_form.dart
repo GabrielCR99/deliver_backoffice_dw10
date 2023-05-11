@@ -119,22 +119,7 @@ class _PaymentTypeFormState extends State<PaymentTypeForm> {
                     padding: const EdgeInsets.all(8),
                     height: 60,
                     child: ElevatedButton.icon(
-                      onPressed: () {
-                        final formValid =
-                            _formKey.currentState?.validate() ?? false;
-
-                        if (formValid) {
-                          final name = _nameEC.text;
-                          final acronym = _acronymEC.text;
-
-                          widget.controller.savePayment(
-                            id: widget.model?.id,
-                            name: name,
-                            acronym: acronym,
-                            enabled: _enabled,
-                          );
-                        }
-                      },
+                      onPressed: _onPressedsavePayment,
                       icon: const Icon(Icons.save),
                       label: const Text('Salvar'),
                     ),
@@ -146,6 +131,22 @@ class _PaymentTypeFormState extends State<PaymentTypeForm> {
         ),
       ),
     );
+  }
+
+  void _onPressedsavePayment() {
+    final formValid = _formKey.currentState?.validate() ?? false;
+
+    if (formValid) {
+      final name = _nameEC.text;
+      final acronym = _acronymEC.text;
+
+      widget.controller.savePayment(
+        id: widget.model?.id,
+        name: name,
+        acronym: acronym,
+        enabled: _enabled,
+      );
+    }
   }
 
   @override

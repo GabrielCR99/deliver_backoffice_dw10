@@ -6,7 +6,7 @@ import '../../repositories/auth/auth_repository.dart';
 import 'login_service.dart';
 
 @immutable
-class LoginServiceImpl implements LoginService {
+final class LoginServiceImpl implements LoginService {
   final AuthRepository _authRepository;
   final Storage _storage;
 

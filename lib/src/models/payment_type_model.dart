@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart' show immutable;
 
 @immutable
-class PaymentTypeModel {
+final class PaymentTypeModel {
   final int? id;
   final String name;
   final String acronym;
@@ -14,21 +14,18 @@ class PaymentTypeModel {
     this.id,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'acronym': acronym,
-      'enabled': enabled,
-    };
-  }
+  Map<String, dynamic> toMap() => {
+        'id': id,
+        'name': name,
+        'acronym': acronym,
+        'enabled': enabled,
+      };
 
-  factory PaymentTypeModel.fromMap(Map<String, dynamic> map) {
-    return PaymentTypeModel(
-      name: map['name'] as String,
-      acronym: map['acronym'] as String,
-      enabled: map['enabled'] as bool,
-      id: map['id'] as int?,
-    );
-  }
+  factory PaymentTypeModel.fromMap(Map<String, dynamic> map) =>
+      PaymentTypeModel(
+        name: map['name'] as String,
+        acronym: map['acronym'] as String,
+        enabled: map['enabled'] as bool,
+        id: map['id'] as int?,
+      );
 }

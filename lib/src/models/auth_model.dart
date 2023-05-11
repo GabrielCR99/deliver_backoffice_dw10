@@ -3,22 +3,15 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 @immutable
-class AuthModel {
+final class AuthModel {
   final String accessToken;
 
   const AuthModel({required this.accessToken});
 
-  Map<String, dynamic> toMap() {
-    return {
-      'access_token': accessToken,
-    };
-  }
+  Map<String, dynamic> toMap() => {'access_token': accessToken};
 
-  factory AuthModel.fromMap(Map<String, dynamic> map) {
-    return AuthModel(
-      accessToken: (map['access_token'] ?? '') as String,
-    );
-  }
+  factory AuthModel.fromMap(Map<String, dynamic> map) =>
+      AuthModel(accessToken: (map['access_token'] ?? '') as String);
 
   String toJson() => json.encode(toMap());
 

@@ -8,9 +8,9 @@ part 'login_controller.g.dart';
 
 enum LoginStateStatus { initial, loading, success, error }
 
-class LoginController = LoginControllerBase with _$LoginController;
+final class LoginController = LoginControllerBase with _$LoginController;
 
-abstract class LoginControllerBase with Store {
+abstract interface class LoginControllerBase with Store {
   @readonly
   var _loginStatus = LoginStateStatus.initial;
 

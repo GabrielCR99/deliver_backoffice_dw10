@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../storage/storage.dart';
 
-class GlobalContext {
+final class GlobalContext {
   static GlobalContext? _instance;
   late final GlobalKey<NavigatorState> _navigatorKey;
 

@@ -2,7 +2,7 @@ import 'dart:html';
 
 import 'storage.dart';
 
-class SessionStorage implements Storage {
+final class SessionStorage implements Storage {
   @override
   void clearData() => window.sessionStorage.clear();
 

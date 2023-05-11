@@ -9,7 +9,7 @@ import '../../models/payment_type_model.dart';
 import 'payment_type_repository.dart';
 
 @immutable
-class PaymentTypeRepositoryImpl implements PaymentTypeRepository {
+final class PaymentTypeRepositoryImpl implements PaymentTypeRepository {
   final CustomDio _dio;
 
   const PaymentTypeRepositoryImpl({required CustomDio dio}) : _dio = dio;
@@ -17,7 +17,7 @@ class PaymentTypeRepositoryImpl implements PaymentTypeRepository {
   @override
   Future<List<PaymentTypeModel>> findAll({bool? enabled}) async {
     try {
-      final result = await _dio.auth().get<List>(
+      final result = await _dio.auth().get<List<Object?>>(
         '/payment-types',
         queryParameters: {if (enabled != null) 'enabled': enabled},
       );

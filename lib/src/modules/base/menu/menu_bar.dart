@@ -43,10 +43,7 @@ class _MenuBarState extends State<MenuBar> {
 
                 return MenuButton(
                   menu: menu,
-                  onPressed: (value) {
-                    setState(() => selectedMenu = value);
-                    Modular.to.navigate(value.route);
-                  },
+                  onPressed: _onPressedMenu,
                   selectedMenu: selectedMenu,
                 );
               },
@@ -56,5 +53,10 @@ class _MenuBarState extends State<MenuBar> {
         ],
       ),
     );
+  }
+
+  void _onPressedMenu(Menu value) {
+    setState(() => selectedMenu = value);
+    Modular.to.navigate(value.route);
   }
 }

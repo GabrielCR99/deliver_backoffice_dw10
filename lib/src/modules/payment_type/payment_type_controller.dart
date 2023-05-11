@@ -16,10 +16,10 @@ enum PaymentTypeStateStatus {
   saved,
 }
 
-class PaymentTypeController = PaymentTypeControllerBase
+final class PaymentTypeController = PaymentTypeControllerBase
     with _$PaymentTypeController;
 
-abstract class PaymentTypeControllerBase with Store {
+abstract interface class PaymentTypeControllerBase with Store {
   @readonly
   PaymentTypeModel? _selectedPaymentType;
 
