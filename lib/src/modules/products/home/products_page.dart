@@ -23,16 +23,11 @@ class _ProductsPageState extends State<ProductsPage>
   final _debouncer = Debouncer(milliseconds: 500);
   late final ReactionDisposer _disposer;
 
-  Future<void> _onButtontap() async {
-    await Navigator.of(context).pushNamed('./product-detail');
-    _controller.getProducts();
-  }
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _disposer = reaction((p0) => _controller.status, (status) {
+      _disposer = reaction((p0) => _controller.status, (status) async {
         switch (status) {
           case ProductStateStatus.initial:
           case ProductStateStatus.loading:
@@ -42,6 +37,15 @@ class _ProductsPageState extends State<ProductsPage>
           case ProductStateStatus.error:
             hideLoader();
             showError('Erro ao buscar os produtos');
+          case ProductStateStatus.addOrUpdateProduct:
+            hideLoader();
+            var uri = './product-detail';
+            final selectedProduct = _controller.selectedProduct;
+            if (selectedProduct != null) {
+              uri += '?id=${selectedProduct.id}';
+            }
+            await Navigator.of(context).pushNamed(uri);
+            _controller.getProducts();
         }
       });
       _controller.getProducts();
@@ -57,10 +61,10 @@ class _ProductsPageState extends State<ProductsPage>
         children: [
           BaseHeader(
             title: 'ADMINISTRAR PRODUTOS',
+            onButtonTap: _controller.addProduct,
+            buttonLabel: 'ADICIONAR PRODUTO',
             onSearch: (value) =>
                 _debouncer(() => _controller.filterByName(value)),
-            buttonLabel: 'ADICIONAR PRODUTO',
-            onButtonTap: _onButtontap,
           ),
           const SizedBox(height: 50),
           Expanded(

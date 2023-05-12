@@ -59,7 +59,8 @@ final class ProductsRepositoryImpl implements ProductsRepository {
   @override
   Future<ProductModel> findById(int id) async {
     try {
-      final result = await _dio.auth().get<Map<String, dynamic>>('/products');
+      final result =
+          await _dio.auth().get<Map<String, dynamic>>('/products/$id');
 
       return ProductModel.fromMap(result.data!);
     } on DioError catch (e, s) {
@@ -83,6 +84,7 @@ final class ProductsRepositoryImpl implements ProductsRepository {
 
         return;
       }
+
       await client.post<void>('/products', data: data);
     } on DioError catch (e, s) {
       log('Erro ao salvar produto', error: e, stackTrace: s);

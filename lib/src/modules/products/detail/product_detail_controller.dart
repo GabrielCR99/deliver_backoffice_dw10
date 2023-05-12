@@ -34,23 +34,11 @@ abstract interface class ProductDetailControllerBase with Store {
   @readonly
   String? _imagePath;
 
+  @readonly
+  ProductModel? _productModel;
+
   ProductDetailControllerBase({required ProductsRepository productsRepository})
       : _productsRepository = productsRepository;
-
-  @action
-  Future<void> deleteProduct(int id) async {
-    _status = ProductDetailStateStatus.loading;
-
-    try {
-      await _productsRepository.delete(id);
-      _status = ProductDetailStateStatus.deleted;
-    } catch (e, s) {
-      log('Erro ao deletar o produto', error: e, stackTrace: s);
-
-      _errorMessage = 'Erro ao deletar o produto';
-      _status = ProductDetailStateStatus.error;
-    }
-  }
 
   @action
   Future<void> uploadImageProduct(Uint8List file, String fileName) async {
@@ -67,6 +55,7 @@ abstract interface class ProductDetailControllerBase with Store {
     }
   }
 
+  @action
   Future<void> save({
     required String name,
     required double price,
@@ -78,7 +67,8 @@ abstract interface class ProductDetailControllerBase with Store {
       description: description,
       price: price,
       image: _imagePath!,
-      enabled: true,
+      enabled: _productModel?.enabled ?? true,
+      id: _productModel?.id,
     );
 
     try {
@@ -88,6 +78,46 @@ abstract interface class ProductDetailControllerBase with Store {
       log('Erro ao salvar o produto', error: e, stackTrace: s);
 
       _errorMessage = 'Erro ao salvar o produto';
+      _status = ProductDetailStateStatus.error;
+    }
+  }
+
+  @action
+  Future<void> loadProduct(int? id) async {
+    _status = ProductDetailStateStatus.loading;
+    _productModel = null;
+    _imagePath = null;
+
+    try {
+      if (id != null) {
+        _productModel = await _productsRepository.findById(id);
+        _imagePath = _productModel!.image;
+      }
+      _status = ProductDetailStateStatus.success;
+    } catch (e, s) {
+      log('Erro ao buscar o produto', error: e, stackTrace: s);
+
+      _errorMessage = 'Erro ao buscar o produto';
+      _status = ProductDetailStateStatus.errorLoadingProduct;
+    }
+  }
+
+  @action
+  Future<void> deleteProduct() async {
+    _status = ProductDetailStateStatus.loading;
+
+    try {
+      if (_productModel != null && _productModel!.id != null) {
+        await _productsRepository.delete(_productModel!.id!);
+        _status = ProductDetailStateStatus.deleted;
+      }
+      await Future<void>.delayed(Duration.zero);
+      _status = ProductDetailStateStatus.deleted;
+      _errorMessage = 'Produto não cadastrado, não é possível deletar';
+    } catch (e, s) {
+      log('Erro ao deletar o produto', error: e, stackTrace: s);
+
+      _errorMessage = 'Erro ao deletar o produto';
       _status = ProductDetailStateStatus.error;
     }
   }

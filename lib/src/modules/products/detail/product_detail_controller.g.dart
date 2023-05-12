@@ -63,13 +63,22 @@ mixin _$ProductDetailController on ProductDetailControllerBase, Store {
     });
   }
 
-  late final _$deleteProductAsyncAction = AsyncAction(
-      'ProductDetailControllerBase.deleteProduct',
-      context: context);
+  late final _$_productModelAtom =
+      Atom(name: 'ProductDetailControllerBase._productModel', context: context);
+
+  ProductModel? get productModel {
+    _$_productModelAtom.reportRead();
+    return super._productModel;
+  }
 
   @override
-  Future<void> deleteProduct(int id) {
-    return _$deleteProductAsyncAction.run(() => super.deleteProduct(id));
+  ProductModel? get _productModel => productModel;
+
+  @override
+  set _productModel(ProductModel? value) {
+    _$_productModelAtom.reportWrite(value, super._productModel, () {
+      super._productModel = value;
+    });
   }
 
   late final _$uploadImageProductAsyncAction = AsyncAction(
@@ -80,6 +89,35 @@ mixin _$ProductDetailController on ProductDetailControllerBase, Store {
   Future<void> uploadImageProduct(Uint8List file, String fileName) {
     return _$uploadImageProductAsyncAction
         .run(() => super.uploadImageProduct(file, fileName));
+  }
+
+  late final _$saveAsyncAction =
+      AsyncAction('ProductDetailControllerBase.save', context: context);
+
+  @override
+  Future<void> save(
+      {required String name,
+      required double price,
+      required String description}) {
+    return _$saveAsyncAction.run(
+        () => super.save(name: name, price: price, description: description));
+  }
+
+  late final _$loadProductAsyncAction =
+      AsyncAction('ProductDetailControllerBase.loadProduct', context: context);
+
+  @override
+  Future<void> loadProduct(int? id) {
+    return _$loadProductAsyncAction.run(() => super.loadProduct(id));
+  }
+
+  late final _$deleteProductAsyncAction = AsyncAction(
+      'ProductDetailControllerBase.deleteProduct',
+      context: context);
+
+  @override
+  Future<void> deleteProduct() {
+    return _$deleteProductAsyncAction.run(() => super.deleteProduct());
   }
 
   @override

@@ -4,6 +4,7 @@ import 'package:mobx/mobx.dart';
 
 import '../../../models/product_model.dart';
 import '../../../repositories/products/products_repository.dart';
+
 part 'products_controller.g.dart';
 
 enum ProductStateStatus {
@@ -11,6 +12,7 @@ enum ProductStateStatus {
   loading,
   success,
   error,
+  addOrUpdateProduct,
 }
 
 final class ProductsController = ProductsControllerBase
@@ -25,6 +27,9 @@ abstract interface class ProductsControllerBase with Store {
 
   @readonly
   var _products = <ProductModel>[];
+
+  @readonly
+  ProductModel? _selectedProduct;
 
   final ProductsRepository _productsRepository;
 
@@ -49,5 +54,21 @@ abstract interface class ProductsControllerBase with Store {
   Future<void> filterByName(String name) async {
     _filterName = name;
     await getProducts();
+  }
+
+  @action
+  Future<void> addProduct() async {
+    _status = ProductStateStatus.loading;
+    await Future<void>.delayed(Duration.zero);
+    _selectedProduct = null;
+    _status = ProductStateStatus.addOrUpdateProduct;
+  }
+
+  @action
+  Future<void> editProduct(ProductModel productModel) async {
+    _status = ProductStateStatus.loading;
+    await Future<void>.delayed(Duration.zero);
+    _selectedProduct = productModel;
+    _status = ProductStateStatus.addOrUpdateProduct;
   }
 }

@@ -19,7 +19,9 @@ final class ProductsModule extends Module {
         ChildRoute<ProductsPage>('/', child: (_, __) => const ProductsPage()),
         ChildRoute<ProductDetailPage>(
           '/product-detail',
-          child: (_, args) => const ProductDetailPage(),
+          child: (_, args) => ProductDetailPage(
+            productId: int.tryParse(args.queryParams['id'] ?? ''),
+          ),
         ),
       ];
 }

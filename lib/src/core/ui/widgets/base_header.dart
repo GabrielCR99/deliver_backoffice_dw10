@@ -6,14 +6,14 @@ class BaseHeader extends StatelessWidget {
   final String title;
   final ValueChanged<String>? onSearch;
   final String buttonLabel;
-  final VoidCallback onButtonTap;
+  final VoidCallback? onButtonTap;
   final bool showAddButton;
   final Widget? filterWidget;
 
   const BaseHeader({
     required this.title,
-    required this.buttonLabel,
-    required this.onButtonTap,
+    this.onButtonTap,
+    this.buttonLabel = '',
     this.onSearch,
     this.showAddButton = true,
     this.filterWidget,

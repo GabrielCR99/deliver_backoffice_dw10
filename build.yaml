@@ -1,7 +1,6 @@
 targets:
   $default:
     builders:
-      mobx|mobx_codegen:
-        enabled: true
+      mobx_codegen|mobx_generator:
         generate_for:
-          - lib/src/modules/**/**.dart
+          - lib/src/modules/**/**_controller.dart
