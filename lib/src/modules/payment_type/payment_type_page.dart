@@ -45,24 +45,28 @@ class _PaymentTypePageState extends State<PaymentTypePage>
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final filterDisposer = reaction(
-        (p0) => _controller.filterEnabled,
-        (p0) => _controller.getPayments(),
+        (_) => _controller.filterEnabled,
+        (_) => _controller.getPayments(),
       );
       final statusDisposer = reaction((_) => _controller.status, (status) {
         switch (status) {
           case PaymentTypeStateStatus.initial:
           case PaymentTypeStateStatus.loading:
             showLoader();
+
           case PaymentTypeStateStatus.error:
             hideLoader();
             showError(
               _controller.errorMessage ?? 'Erro ao buscar tipos de pagamento',
             );
+
           case PaymentTypeStateStatus.success:
             hideLoader();
+
           case PaymentTypeStateStatus.addOrUpdatePayment:
             hideLoader();
             _showAddOrUpdatePayment();
+
           case PaymentTypeStateStatus.saved:
             hideLoader();
             Navigator.of(context, rootNavigator: true).pop();

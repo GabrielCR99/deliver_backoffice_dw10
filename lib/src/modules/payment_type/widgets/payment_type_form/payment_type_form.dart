@@ -84,6 +84,7 @@ class _PaymentTypeFormState extends State<PaymentTypeForm> {
                 decoration: const InputDecoration(label: Text('Sigla')),
                 validator: Validatorless.required('Sigla obrigatória'),
               ),
+              const SizedBox(height: 20),
               Row(
                 children: [
                   Text(

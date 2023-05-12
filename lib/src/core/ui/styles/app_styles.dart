@@ -19,6 +19,7 @@ final class AppStyles {
           borderRadius: BorderRadius.all(Radius.circular(7)),
         ),
         textStyle: TextStyles.instance.textButtonLabel,
+        foregroundColor: Colors.white,
       );
 }
 

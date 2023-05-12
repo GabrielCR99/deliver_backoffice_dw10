@@ -12,9 +12,9 @@ class BaseHeader extends StatelessWidget {
 
   const BaseHeader({
     required this.title,
-    required this.onSearch,
     required this.buttonLabel,
     required this.onButtonTap,
+    this.onSearch,
     this.showAddButton = true,
     this.filterWidget,
     super.key,

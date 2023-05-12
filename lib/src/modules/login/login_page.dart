@@ -44,9 +44,11 @@ class _LoginPageState extends State<LoginPage>
         case LoginStateStatus.error:
           hideLoader();
           showError(_controller.errorMessage ?? 'Erro ao realizar login');
+
         case LoginStateStatus.success:
           hideLoader();
           Modular.to.navigate('/');
+
         case LoginStateStatus.initial:
         case LoginStateStatus.loading:
           showLoader();
@@ -135,7 +137,9 @@ class _LoginPageState extends State<LoginPage>
                           height: 50,
                           child: ElevatedButton(
                             onPressed: _onPressedLogin,
-                            child: const Text('Entrar'),
+                            child: const Text(
+                              'Entrar',
+                            ),
                           ),
                         ),
                       ],

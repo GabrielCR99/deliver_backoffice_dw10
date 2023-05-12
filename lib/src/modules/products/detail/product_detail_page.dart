@@ -50,7 +50,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
         case ProductDetailStateStatus.errorLoadingProduct:
         case ProductDetailStateStatus.deleted:
           hideLoader();
-          Modular.to.pop();
+          Navigator.of(context).pop();
 
         case ProductDetailStateStatus.uploaded:
           hideLoader();

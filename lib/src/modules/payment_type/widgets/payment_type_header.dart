@@ -19,7 +19,6 @@ class _PaymentTypeHeaderState extends State<PaymentTypeHeader> {
   Widget build(BuildContext context) {
     return BaseHeader(
       title: 'ADMINISTRAR FORMAS DE PAGAMENTO',
-      onSearch: (value) {},
       buttonLabel: 'ADICIONAR',
       onButtonTap: widget.controller.addPayment,
       filterWidget: DropdownButton<bool>(
