@@ -8,7 +8,7 @@ import '../../repositories/products/products_repository.dart';
 import '../../repositories/user/user_repository.dart';
 import 'get_order_by_id.dart';
 
-class GetOrderByIdImpl implements GetOrderById {
+final class GetOrderByIdImpl implements GetOrderById {
   final PaymentTypeRepository _paymentTypeRepository;
   final UserRepository _userRepository;
   final ProductsRepository _productsRepository;

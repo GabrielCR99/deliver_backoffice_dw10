@@ -19,7 +19,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage>
     with Loader<LoginPage>, Messages<LoginPage> {
-  final _controller = Modular.get<LoginController>();
+  late final _controller = context.read<LoginController>();
   final _emailEC = TextEditingController();
   final _passwordEC = TextEditingController();
   final _formKey = GlobalKey<FormState>();

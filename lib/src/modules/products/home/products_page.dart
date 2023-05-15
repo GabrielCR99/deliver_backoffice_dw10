@@ -19,7 +19,7 @@ class ProductsPage extends StatefulWidget {
 
 class _ProductsPageState extends State<ProductsPage>
     with Loader<ProductsPage>, Messages<ProductsPage> {
-  final _controller = Modular.get<ProductsController>();
+  late final _controller = context.read<ProductsController>();
   final _debouncer = Debouncer(milliseconds: 500);
   late final ReactionDisposer _disposer;
 

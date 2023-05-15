@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart' show immutable;
 
 @immutable
@@ -26,9 +24,4 @@ final class OrderProductModel {
         amount: (map['amount'] ?? 0) as int,
         totalPrice: (map['total_price'] ?? 0.0) as double,
       );
-
-  String toJson() => json.encode(toMap());
-
-  factory OrderProductModel.fromJson(String source) =>
-      OrderProductModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

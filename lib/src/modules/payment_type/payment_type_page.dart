@@ -19,7 +19,7 @@ class PaymentTypePage extends StatefulWidget {
 
 class _PaymentTypePageState extends State<PaymentTypePage>
     with Loader<PaymentTypePage>, Messages<PaymentTypePage> {
-  final _controller = Modular.get<PaymentTypeController>();
+  late final _controller = context.read<PaymentTypeController>();
   final _disposers = <ReactionDisposer>[];
 
   void _showAddOrUpdatePayment() => showDialog<void>(

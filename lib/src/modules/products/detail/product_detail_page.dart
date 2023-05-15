@@ -26,7 +26,7 @@ class ProductDetailPage extends StatefulWidget {
 
 class _ProductDetailPageState extends State<ProductDetailPage>
     with Loader<ProductDetailPage>, Messages<ProductDetailPage> {
-  final _controller = Modular.get<ProductDetailController>();
+  late final _controller = context.read<ProductDetailController>();
   final _nameEC = TextEditingController();
   final _priceEC = TextEditingController();
   final _descriptionEC = TextEditingController();
