@@ -14,11 +14,11 @@ dependencies:
   dio: ^5.1.2
   flutter:
     sdk: flutter
-  flutter_web_plugins:
-    sdk: flutter
   flutter_dotenv: ^5.0.2
   flutter_mobx: ^2.0.6+5
   flutter_modular: ^5.0.3
+  flutter_web_plugins:
+    sdk: flutter
   loading_animation_widget: ^1.2.0+4
   mobx: ^2.2.0
   url_strategy: ^0.2.0
