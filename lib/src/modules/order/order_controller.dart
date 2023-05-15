@@ -2,9 +2,12 @@ import 'dart:developer';
 
 import 'package:mobx/mobx.dart';
 
+import '../../dtos/order/order_dto.dart';
 import '../../models/orders/order_model.dart';
 import '../../models/orders/order_status.dart';
 import '../../repositories/order/order_repository.dart';
+import '../../services/order/get_order_by_id.dart';
+
 part 'order_controller.g.dart';
 
 enum OrderStateStatus {
@@ -13,6 +16,7 @@ enum OrderStateStatus {
   success,
   error,
   showDetailModal,
+  statusChanged,
 }
 
 final class OrderController = OrderControllerBase with _$OrderController;
@@ -30,14 +34,27 @@ abstract interface class OrderControllerBase with Store {
   @readonly
   String? _errorMessage;
 
+  @readonly
+  OrderDto? _selectedOrder;
+
   late final DateTime _today;
 
   final OrderRepository _orderRepository;
+  final GetOrderById _getOrderById;
 
-  OrderControllerBase({required OrderRepository orderRepository})
-      : _orderRepository = orderRepository {
+  OrderControllerBase({
+    required OrderRepository orderRepository,
+    required GetOrderById getOrderById,
+  })  : _orderRepository = orderRepository,
+        _getOrderById = getOrderById {
     final todayNow = DateTime.now();
     _today = DateTime(todayNow.year, todayNow.month, todayNow.day);
+  }
+
+  @action
+  void changeStatusFilter(OrderStatus? status) {
+    _filterStatus = status;
+    findOrders();
   }
 
   @action
@@ -55,9 +72,16 @@ abstract interface class OrderControllerBase with Store {
   }
 
   @action
-  Future<void> showDetailModal() async {
+  Future<void> showDetailModal(OrderModel model) async {
     _status = OrderStateStatus.loading;
-    await Future<void>.delayed(Duration.zero);
+    _selectedOrder = await _getOrderById(model);
     _status = OrderStateStatus.showDetailModal;
+  }
+
+  @action
+  Future<void> changeStatus(OrderStatus status) async {
+    _status = OrderStateStatus.loading;
+    await _orderRepository.changeStatus(id: _selectedOrder!.id, status: status);
+    _status = OrderStateStatus.statusChanged;
   }
 }

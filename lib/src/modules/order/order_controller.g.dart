@@ -81,6 +81,24 @@ mixin _$OrderController on OrderControllerBase, Store {
     });
   }
 
+  late final _$_selectedOrderAtom =
+      Atom(name: 'OrderControllerBase._selectedOrder', context: context);
+
+  OrderDto? get selectedOrder {
+    _$_selectedOrderAtom.reportRead();
+    return super._selectedOrder;
+  }
+
+  @override
+  OrderDto? get _selectedOrder => selectedOrder;
+
+  @override
+  set _selectedOrder(OrderDto? value) {
+    _$_selectedOrderAtom.reportWrite(value, super._selectedOrder, () {
+      super._selectedOrder = value;
+    });
+  }
+
   late final _$findOrdersAsyncAction =
       AsyncAction('OrderControllerBase.findOrders', context: context);
 
@@ -93,8 +111,30 @@ mixin _$OrderController on OrderControllerBase, Store {
       AsyncAction('OrderControllerBase.showDetailModal', context: context);
 
   @override
-  Future<void> showDetailModal() {
-    return _$showDetailModalAsyncAction.run(() => super.showDetailModal());
+  Future<void> showDetailModal(OrderModel model) {
+    return _$showDetailModalAsyncAction.run(() => super.showDetailModal(model));
+  }
+
+  late final _$changeStatusAsyncAction =
+      AsyncAction('OrderControllerBase.changeStatus', context: context);
+
+  @override
+  Future<void> changeStatus(OrderStatus status) {
+    return _$changeStatusAsyncAction.run(() => super.changeStatus(status));
+  }
+
+  late final _$OrderControllerBaseActionController =
+      ActionController(name: 'OrderControllerBase', context: context);
+
+  @override
+  void changeStatusFilter(OrderStatus? status) {
+    final _$actionInfo = _$OrderControllerBaseActionController.startAction(
+        name: 'OrderControllerBase.changeStatusFilter');
+    try {
+      return super.changeStatusFilter(status);
+    } finally {
+      _$OrderControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

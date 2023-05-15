@@ -1,38 +1,58 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/ui/styles/text_styles.dart';
+import '../../../../dtos/order/order_dto.dart';
+import '../../../../models/orders/order_status.dart';
+import '../../order_controller.dart';
 
 class OrderBottomBar extends StatelessWidget {
-  const OrderBottomBar({super.key});
+  final OrderController controller;
+  final OrderDto order;
+
+  const OrderBottomBar({
+    required this.controller,
+    required this.order,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _OrderBottomBarButtom(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(10),
             bottomLeft: Radius.circular(10),
           ),
           color: Colors.blue,
           image: 'assets/images/icons/finish_order_white_ico.png',
           buttonLabel: 'Finalizar',
+          onPressed: order.status == OrderStatus.confirmed
+              ? () => controller.changeStatus(OrderStatus.finished)
+              : null,
         ),
         _OrderBottomBarButtom(
           borderRadius: BorderRadius.zero,
           color: Colors.green,
           image: 'assets/images/icons/confirm_order_white_icon.png',
           buttonLabel: 'Confirmar',
+          onPressed: order.status == OrderStatus.pending
+              ? () => controller.changeStatus(OrderStatus.confirmed)
+              : null,
         ),
         _OrderBottomBarButtom(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topRight: Radius.circular(10),
             bottomRight: Radius.circular(10),
           ),
           color: Colors.red,
           image: 'assets/images/icons/cancel_order_white_icon.png',
           buttonLabel: 'Cancelar',
+          onPressed: order.status != OrderStatus.cancelled &&
+                  order.status != OrderStatus.finished
+              ? () => controller.changeStatus(OrderStatus.cancelled)
+              : null,
         ),
       ],
     );
@@ -44,12 +64,14 @@ class _OrderBottomBarButtom extends StatelessWidget {
   final Color color;
   final String image;
   final String buttonLabel;
+  final VoidCallback? onPressed;
 
   const _OrderBottomBarButtom({
     required this.borderRadius,
     required this.color,
     required this.image,
     required this.buttonLabel,
+    required this.onPressed,
   });
 
   @override
@@ -59,10 +81,10 @@ class _OrderBottomBarButtom extends StatelessWidget {
       child: SizedBox(
         height: 60,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(borderRadius: borderRadius),
-            side: BorderSide(color: color),
+            side: onPressed != null ? BorderSide(color: color) : null,
             backgroundColor: color,
           ),
           child: Row(

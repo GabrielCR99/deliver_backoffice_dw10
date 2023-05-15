@@ -18,7 +18,6 @@ final class LoginModule extends Module {
       ];
 
   @override
-  List<ModularRoute> get routes => [
-        ChildRoute<LoginPage>('/', child: (context, args) => const LoginPage()),
-      ];
+  List<ModularRoute> get routes =>
+      [ChildRoute<LoginPage>('/', child: (_, __) => const LoginPage())];
 }

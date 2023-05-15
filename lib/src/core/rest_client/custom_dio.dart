@@ -5,7 +5,7 @@ import '../env/env.dart';
 import '../storage/storage.dart';
 import 'interceptors/auth_interceptor.dart';
 
-class CustomDio extends DioForBrowser {
+final class CustomDio extends DioForBrowser {
   late final AuthInterceptor _authInterceptor;
 
   CustomDio({required Storage storage})
@@ -20,7 +20,13 @@ class CustomDio extends DioForBrowser {
     _authInterceptor = AuthInterceptor(storage);
   }
 
-  CustomDio auth() => this..interceptors.add(_authInterceptor);
+  CustomDio auth() {
+    if (!interceptors.contains(_authInterceptor)) {
+      return this..interceptors.add(_authInterceptor);
+    }
+
+    return this..interceptors;
+  }
 
   CustomDio unauth() => this..interceptors.remove(_authInterceptor);
 }

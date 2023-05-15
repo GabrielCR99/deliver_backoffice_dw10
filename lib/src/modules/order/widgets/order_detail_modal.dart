@@ -3,12 +3,21 @@ import 'package:flutter/material.dart';
 import '../../../core/extensions/formatter_extension.dart';
 import '../../../core/ui/helpers/size_extensions.dart';
 import '../../../core/ui/styles/text_styles.dart';
+import '../../../dtos/order/order_dto.dart';
 import '../detail/widgets/order_bottom_bar.dart';
 import '../detail/widgets/order_info_tile.dart';
 import '../detail/widgets/order_product_item.dart';
+import '../order_controller.dart';
 
 class OrderDetailModal extends StatelessWidget {
-  const OrderDetailModal({super.key});
+  final OrderController controller;
+  final OrderDto order;
+
+  const OrderDetailModal({
+    required this.controller,
+    required this.order,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +58,12 @@ class OrderDetailModal extends StatelessWidget {
                 children: [
                   Text('Nome do cliente: ', style: context.textStyles.textBold),
                   const SizedBox(width: 20),
-                  Text('Gabriel', style: context.textStyles.textRegular),
+                  Text(order.user.name, style: context.textStyles.textRegular),
                 ],
               ),
               const Divider(),
-              ...List.generate(3, (index) => const OrderProductItem()),
+              ...order.products
+                  .map((product) => OrderProductItem(product: product)),
               const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -66,7 +76,13 @@ class OrderDetailModal extends StatelessWidget {
                           .copyWith(fontSize: 18),
                     ),
                     Text(
-                      200.0.currencyPtBr,
+                      order.products
+                          .fold<double>(
+                            0,
+                            (previousValue, element) =>
+                                previousValue + element.totalPrice,
+                          )
+                          .currencyPtBr,
                       style: context.textStyles.textExtraBold
                           .copyWith(fontSize: 18),
                     ),
@@ -74,17 +90,14 @@ class OrderDetailModal extends StatelessWidget {
                 ),
               ),
               const Divider(),
-              const OrderInfoTile(
-                label: 'Endereço de entrega',
-                info: 'Rua 1, 123',
-              ),
+              OrderInfoTile(label: 'Endereço de entrega', info: order.address),
               const Divider(),
-              const OrderInfoTile(
-                label: 'forma de pagamento',
-                info: 'Dinheiro',
+              OrderInfoTile(
+                label: 'Forma de pagamento',
+                info: order.paymentType.name,
               ),
               const SizedBox(height: 10),
-              const OrderBottomBar(),
+              OrderBottomBar(controller: controller, order: order),
             ],
           ),
         ),

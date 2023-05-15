@@ -15,7 +15,7 @@ class OrderItem extends StatelessWidget {
     final textStyles = context.textStyles;
 
     return InkWell(
-      onTap: () => context.read<OrderController>().showDetailModal(),
+      onTap: () => context.read<OrderController>().showDetailModal(order),
       child: Row(
         children: [
           Expanded(

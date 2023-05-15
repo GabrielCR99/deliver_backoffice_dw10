@@ -206,10 +206,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                   ),
                                 ),
                                 TextButton(
-                                  onPressed: () {
-                                    _controller.deleteProduct();
-                                    Navigator.of(context).pop();
-                                  },
+                                  onPressed: _onPressedDeleteProduct,
                                   child: Text(
                                     'Confirmar',
                                     style: context.textStyles.textBold
@@ -250,6 +247,11 @@ class _ProductDetailPageState extends State<ProductDetailPage>
         ),
       ),
     );
+  }
+
+  void _onPressedDeleteProduct() {
+    _controller.deleteProduct();
+    Navigator.of(context).pop();
   }
 
   String get _addOrRemovePicture =>

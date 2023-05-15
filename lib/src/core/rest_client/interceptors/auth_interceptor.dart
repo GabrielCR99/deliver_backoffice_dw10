@@ -6,7 +6,7 @@ import '../../global/constants.dart';
 import '../../global/global_context.dart';
 import '../../storage/storage.dart';
 
-class AuthInterceptor extends Interceptor {
+final class AuthInterceptor extends Interceptor {
   final Storage _storage;
 
   AuthInterceptor(this._storage);

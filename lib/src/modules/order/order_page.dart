@@ -24,7 +24,10 @@ class _OrderPageState extends State<OrderPage>
 
   void _showOrderDetail() => showDialog<void>(
         context: context,
-        builder: (_) => const OrderDetailModal(),
+        builder: (_) => OrderDetailModal(
+          controller: _controller,
+          order: _controller.selectedOrder!,
+        ),
       );
 
   @override
@@ -47,6 +50,10 @@ class _OrderPageState extends State<OrderPage>
           case OrderStateStatus.showDetailModal:
             hideLoader();
             _showOrderDetail();
+          case OrderStateStatus.statusChanged:
+            hideLoader();
+            Navigator.of(context, rootNavigator: true).pop();
+            _controller.findOrders();
         }
       });
       _controller.findOrders();
@@ -60,7 +67,7 @@ class _OrderPageState extends State<OrderPage>
         padding: const EdgeInsets.only(top: 40),
         child: Column(
           children: [
-            const OrderHeader(),
+            OrderHeader(controller: _controller),
             Expanded(
               child: Observer(
                 builder: (_) => GridView.builder(

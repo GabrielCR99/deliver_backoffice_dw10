@@ -24,4 +24,7 @@ enum Menu {
   final String label;
 
   const Menu(this.route, this.assetIcon, this.assetIconSelected, this.label);
+
+  static Menu? findByPath(String path) =>
+      Menu.values.where((e) => path.contains(e.route)).firstOrNull;
 }
