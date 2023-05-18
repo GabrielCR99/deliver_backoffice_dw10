@@ -96,7 +96,11 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                   ),
                 ),
                 IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () =>
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/products',
+                    ModalRoute.withName('/'),
+                  ),
                   icon: const Icon(Icons.close),
                 ),
               ],

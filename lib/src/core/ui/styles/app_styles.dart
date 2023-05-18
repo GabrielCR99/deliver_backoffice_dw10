@@ -22,7 +22,3 @@ final class AppStyles {
         foregroundColor: Colors.white,
       );
 }
-
-extension AppStylesExtension on BuildContext {
-  AppStyles get styles => AppStyles.instance;
-}

@@ -27,7 +27,7 @@ class _ProductsPageState extends State<ProductsPage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _disposer = reaction((p0) => _controller.status, (status) async {
+      _disposer = reaction((_) => _controller.status, (status) async {
         switch (status) {
           case ProductStateStatus.initial:
           case ProductStateStatus.loading:
