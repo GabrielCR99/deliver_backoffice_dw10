@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart' show immutable;
 import '../../core/exceptions/repository_exception.dart';
 import '../../core/exceptions/unauthorized_exception.dart';
 import '../../core/rest_client/custom_dio.dart';
-import '../../models/auth_model.dart';
 import 'auth_repository.dart';
 
 @immutable
@@ -16,7 +15,7 @@ final class AuthRepositoryImpl implements AuthRepository {
   const AuthRepositoryImpl({required CustomDio dio}) : _dio = dio;
 
   @override
-  Future<AuthModel> login({
+  Future<String> login({
     required String email,
     required String password,
   }) async {
@@ -30,7 +29,7 @@ final class AuthRepositoryImpl implements AuthRepository {
         },
       );
 
-      return AuthModel.fromMap(result.data!);
+      return result.data?['access_token'] as String;
     } on DioError catch (e, s) {
       if (e.response?.statusCode == 403) {
         log('Usuário ou senha inválidos', error: e, stackTrace: s);

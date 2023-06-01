@@ -21,14 +21,14 @@ final class LoginServiceImpl implements LoginService {
     required String email,
     required String password,
   }) async {
-    final authModel = await _authRepository.login(
+    final accessToken = await _authRepository.login(
       email: email,
       password: password,
     );
 
     return _storage.setData(
       key: SessionStorageKeys.accessToken.key,
-      value: authModel.accessToken,
+      value: accessToken,
     );
   }
 }

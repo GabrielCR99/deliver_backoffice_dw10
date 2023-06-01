@@ -12,12 +12,6 @@ final class OrderProductModel {
     required this.totalPrice,
   });
 
-  Map<String, dynamic> toMap() => {
-        'id': productId,
-        'amount': amount,
-        'total_price': totalPrice,
-      };
-
   factory OrderProductModel.fromMap(Map<String, dynamic> map) =>
       OrderProductModel(
         productId: (map['id'] ?? 0) as int,

@@ -7,7 +7,8 @@ analyzer:
     - assets/**
     - "**/*.g.dart"
     - "**/*.freezed.dart"
-    - "lib/app/core/logger/**.dart"
+    # - test/**
+    # - "lib/src/core/logger/**.dart"
     - "**/firebase_options.dart"
 
   language:
@@ -96,7 +97,9 @@ linter:
     - flutter_style_todos
     - hash_and_equals
     - implicit_call_tearoffs
+    - implicit_reopen
     - implementation_imports
+    - invalid_case_patterns
     - iterable_contains_unrelated_type
     - join_return_with_assignment
     - leading_newlines_in_multiline_strings
@@ -137,6 +140,7 @@ linter:
     - prefer_const_literals_to_create_immutables
     - prefer_contains
     - prefer_expression_function_bodies: false
+    - prefer_equal_for_default_values
     - prefer_final_fields
     - prefer_final_in_for_each
     - prefer_final_locals
@@ -175,8 +179,10 @@ linter:
     - throw_in_finally
     - tighten_type_of_initializing_formals
     - type_init_formals
+    - type_literal_in_constant_pattern
     - unnecessary_await_in_return
     - unnecessary_brace_in_string_interps
+    - unnecessary_breaks
     - unnecessary_const
     - unnecessary_constructor_name
     - unnecessary_getters_setters

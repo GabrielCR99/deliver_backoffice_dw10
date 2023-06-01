@@ -25,17 +25,6 @@ final class OrderModel {
     required this.paymentTypeId,
   });
 
-  Map<String, dynamic> toMap() => <String, dynamic>{
-        'id': id,
-        'date': date.toIso8601String(),
-        'status': status.acronym,
-        'products': products.map((x) => x.toMap()).toList(),
-        'user_id': userId,
-        'address': address,
-        'cpf': cpf,
-        'payment_type_id': paymentTypeId,
-      };
-
   factory OrderModel.fromMap(Map<String, dynamic> map) => OrderModel(
         id: map['id'] as int,
         date: DateTime.parse(map['date'] as String),

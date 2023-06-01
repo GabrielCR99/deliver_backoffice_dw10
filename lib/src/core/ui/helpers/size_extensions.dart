@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 extension SizeExtensions on BuildContext {
-  MediaQueryData get _mediaQuery => MediaQuery.of(this);
+  Size get size => MediaQuery.sizeOf(this);
 
-  double get height => _mediaQuery.size.height;
-  double get width => _mediaQuery.size.width;
-  double get shortestSide => _mediaQuery.size.shortestSide;
-  double get longestSide => _mediaQuery.size.longestSide;
+  double get height => size.height;
+  double get width => size.width;
+  double get shortestSide => size.shortestSide;
+  double get longestSide => size.longestSide;
 
   double percentWidth(double percent) {
     assert(percent >= 0.0 && percent <= 1, 'percent must be between 0.0 and 1');
