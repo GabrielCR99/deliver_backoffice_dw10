@@ -26,7 +26,7 @@ final class PaymentTypeRepositoryImpl implements PaymentTypeRepository {
           .cast<Map<String, dynamic>>()
           .map(PaymentTypeModel.fromMap)
           .toList();
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       log('Erro ao buscar formas de pagamento', error: e, stackTrace: s);
 
       Error.throwWithStackTrace(
@@ -45,7 +45,7 @@ final class PaymentTypeRepositoryImpl implements PaymentTypeRepository {
           await _dio.auth().get<Map<String, dynamic>>('/payment-types/$id');
 
       return PaymentTypeModel.fromMap(result.data!);
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       log('Erro ao buscar formas de pagamento', error: e, stackTrace: s);
 
       Error.throwWithStackTrace(
@@ -73,7 +73,7 @@ final class PaymentTypeRepositoryImpl implements PaymentTypeRepository {
       await client.post<void>('/payment-types', data: model.toMap());
 
       return;
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       log('Erro ao salvar forma de pagametno', error: e, stackTrace: s);
 
       Error.throwWithStackTrace(

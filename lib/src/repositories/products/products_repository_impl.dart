@@ -19,7 +19,7 @@ final class ProductsRepositoryImpl implements ProductsRepository {
       await _dio
           .auth()
           .put<Map<String, dynamic>>('/products/$id', data: {'enabled': false});
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       log('Erro ao desabilitar produto', error: e, stackTrace: s);
 
       Error.throwWithStackTrace(
@@ -46,7 +46,7 @@ final class ProductsRepositoryImpl implements ProductsRepository {
           .cast<Map<String, dynamic>>()
           .map(ProductModel.fromMap)
           .toList();
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       log('Erro ao buscar produtos', error: e, stackTrace: s);
 
       Error.throwWithStackTrace(
@@ -63,7 +63,7 @@ final class ProductsRepositoryImpl implements ProductsRepository {
           await _dio.auth().get<Map<String, dynamic>>('/products/$id');
 
       return ProductModel.fromMap(result.data!);
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       log('Erro ao buscar produto $id', error: e, stackTrace: s);
 
       Error.throwWithStackTrace(
@@ -86,7 +86,7 @@ final class ProductsRepositoryImpl implements ProductsRepository {
       }
 
       await client.post<void>('/products', data: data);
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       log('Erro ao salvar produto', error: e, stackTrace: s);
 
       Error.throwWithStackTrace(
@@ -108,7 +108,7 @@ final class ProductsRepositoryImpl implements ProductsRepository {
           .post<Map<String, dynamic>>('/uploads', data: formData);
 
       return response.data!['url'] as String;
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       log('Erro ao fazer upload da imagem', error: e, stackTrace: s);
 
       Error.throwWithStackTrace(

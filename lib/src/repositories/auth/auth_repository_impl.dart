@@ -30,7 +30,7 @@ final class AuthRepositoryImpl implements AuthRepository {
       );
 
       return result.data?['access_token'] as String;
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       if (e.response?.statusCode == 403) {
         log('Usuário ou senha inválidos', error: e, stackTrace: s);
 
