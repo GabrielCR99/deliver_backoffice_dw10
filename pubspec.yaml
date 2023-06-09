@@ -25,8 +25,8 @@ dependencies:
   validatorless: ^1.2.3
 
 dev_dependencies:
-  build_runner: ^2.4.4
-  dart_code_metrics: ^5.7.4
+  build_runner: ^2.4.5
+  dart_code_metrics: ^5.7.5
   flutter_test:
     sdk: flutter
   mobx_codegen: ^2.3.0

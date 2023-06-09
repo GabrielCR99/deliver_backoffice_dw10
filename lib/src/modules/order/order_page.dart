@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -33,7 +35,7 @@ class _OrderPageState extends State<OrderPage>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    scheduleMicrotask(() {
       _disposer = reaction((_) => _controller.status, (status) {
         switch (status) {
           case OrderStateStatus.initial:
@@ -62,27 +64,25 @@ class _OrderPageState extends State<OrderPage>
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (_, constraints) => Container(
-        padding: const EdgeInsets.only(top: 40),
-        child: Column(
-          children: [
-            OrderHeader(controller: _controller),
-            Expanded(
-              child: Observer(
-                builder: (_) => GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 600,
-                    mainAxisExtent: 91,
-                  ),
-                  itemBuilder: (_, index) =>
-                      OrderItem(order: _controller.orders[index]),
-                  itemCount: _controller.orders.length,
+    return Container(
+      padding: const EdgeInsets.only(top: 40),
+      child: Column(
+        children: [
+          OrderHeader(controller: _controller),
+          Expanded(
+            child: Observer(
+              builder: (_) => GridView.builder(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 600,
+                  mainAxisExtent: 91,
                 ),
+                itemBuilder: (_, index) =>
+                    OrderItem(order: _controller.orders[index]),
+                itemCount: _controller.orders.length,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

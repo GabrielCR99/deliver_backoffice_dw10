@@ -87,10 +87,7 @@ class _PaymentTypeFormState extends State<PaymentTypeForm> {
               const SizedBox(height: 20),
               Row(
                 children: [
-                  Text(
-                    'Ativo',
-                    style: context.textStyles.textRegular,
-                  ),
+                  Text('Ativo', style: context.textStyles.textRegular),
                   Switch(
                     value: _enabled,
                     onChanged: (value) => setState(() => _enabled = value),

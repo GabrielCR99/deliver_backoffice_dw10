@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -26,7 +28,7 @@ class _ProductsPageState extends State<ProductsPage>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    scheduleMicrotask(() {
       _disposer = reaction((_) => _controller.status, (status) async {
         switch (status) {
           case ProductStateStatus.initial:

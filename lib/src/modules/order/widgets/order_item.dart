@@ -45,10 +45,7 @@ class OrderItem extends StatelessWidget {
               ),
             ),
           ),
-          const VerticalDivider(
-            thickness: 1,
-            color: Colors.grey,
-          ),
+          const VerticalDivider(thickness: 1, color: Colors.grey),
         ],
       ),
     );
