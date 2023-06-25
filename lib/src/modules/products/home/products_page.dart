@@ -32,6 +32,7 @@ class _ProductsPageState extends State<ProductsPage>
       _disposer = reaction((_) => _controller.status, (status) async {
         switch (status) {
           case ProductStateStatus.initial:
+            break;
           case ProductStateStatus.loading:
             showLoader();
           case ProductStateStatus.success:

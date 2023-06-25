@@ -28,7 +28,7 @@ class ProductDetailPage extends StatefulWidget {
 
 class _ProductDetailPageState extends State<ProductDetailPage>
     with Loader<ProductDetailPage>, Messages<ProductDetailPage> {
-  late final _controller = context.read<ProductDetailController>();
+  late final ProductDetailController _controller;
   final _nameEC = TextEditingController();
   final _priceEC = TextEditingController();
   final _descriptionEC = TextEditingController();
@@ -37,31 +37,31 @@ class _ProductDetailPageState extends State<ProductDetailPage>
   @override
   void initState() {
     super.initState();
+    _controller = context.read<ProductDetailController>();
     scheduleMicrotask(() {
       reaction((_) => _controller.status, (status) {
+        debugPrint('Status: $status');
+
         switch (status) {
           case ProductDetailStateStatus.initial:
+            break;
           case ProductDetailStateStatus.loading:
             showLoader();
-
           case ProductDetailStateStatus.success:
             final model = _controller.productModel!;
             _nameEC.text = model.name;
             _priceEC.text = model.price.currencyPtBr;
             _descriptionEC.text = model.description;
             hideLoader();
-
           case ProductDetailStateStatus.error:
             hideLoader();
             showError(_controller.errorMessage ?? 'Erro ao buscar o produto');
-
           case ProductDetailStateStatus.errorLoadingProduct:
             hideLoader();
             showError(_controller.errorMessage ?? 'Erro ao buscar o produto');
             Navigator.of(context).pop();
-
-          case ProductDetailStateStatus.deleted:
-          case ProductDetailStateStatus.saved:
+          case ProductDetailStateStatus.deleted ||
+                ProductDetailStateStatus.saved:
             hideLoader();
             Navigator.of(context).pop();
           case ProductDetailStateStatus.uploaded:
@@ -136,9 +136,8 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.white.withOpacity(0.9),
                         ),
-                        child: Observer(
-                          builder: (_) => Text(_addOrRemovePicture),
-                        ),
+                        child:
+                            Observer(builder: (_) => Text(_addOrRemovePicture)),
                       ),
                     ),
                   ],
@@ -203,7 +202,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                               ),
                               actions: [
                                 TextButton(
-                                  onPressed: () => Navigator.of(context).pop(),
+                                  onPressed: Navigator.of(context).pop,
                                   child: Text(
                                     'Cancelar',
                                     style: context.textStyles.textBold
@@ -211,7 +210,8 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                   ),
                                 ),
                                 TextButton(
-                                  onPressed: _onPressedDeleteProduct,
+                                  onPressed: () =>
+                                      _onPressedDeleteProduct(context),
                                   child: Text(
                                     'Confirmar',
                                     style: context.textStyles.textBold
@@ -254,7 +254,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
     );
   }
 
-  void _onPressedDeleteProduct() {
+  void _onPressedDeleteProduct(BuildContext context) {
     _controller.deleteProduct();
     Navigator.of(context).pop();
   }
@@ -267,17 +267,13 @@ class _ProductDetailPageState extends State<ProductDetailPage>
 
     if (formValid) {
       if (_controller.imagePath == null) {
-        showWarning(
-          'Selecione uma imagem para o produto',
-        );
+        showWarning('Selecione uma imagem para o produto');
 
         return;
       }
       _controller.save(
         name: _nameEC.text,
-        price: UtilBrasilFields.converterMoedaParaDouble(
-          _priceEC.text,
-        ),
+        price: UtilBrasilFields.converterMoedaParaDouble(_priceEC.text),
         description: _descriptionEC.text,
       );
     }

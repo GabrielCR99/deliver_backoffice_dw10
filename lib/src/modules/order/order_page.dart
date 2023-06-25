@@ -39,16 +39,14 @@ class _OrderPageState extends State<OrderPage>
       _disposer = reaction((_) => _controller.status, (status) {
         switch (status) {
           case OrderStateStatus.initial:
+            break;
           case OrderStateStatus.loading:
             showLoader();
-
           case OrderStateStatus.error:
             hideLoader();
             showError(_controller.errorMessage ?? 'Erro ao buscar pedidos');
-
           case OrderStateStatus.success:
             hideLoader();
-
           case OrderStateStatus.showDetailModal:
             hideLoader();
             _showOrderDetail();

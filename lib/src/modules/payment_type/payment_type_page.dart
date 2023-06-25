@@ -53,22 +53,19 @@ class _PaymentTypePageState extends State<PaymentTypePage>
       final statusDisposer = reaction((_) => _controller.status, (status) {
         switch (status) {
           case PaymentTypeStateStatus.initial:
+            break;
           case PaymentTypeStateStatus.loading:
             showLoader();
-
           case PaymentTypeStateStatus.error:
             hideLoader();
             showError(
               _controller.errorMessage ?? 'Erro ao buscar tipos de pagamento',
             );
-
           case PaymentTypeStateStatus.success:
             hideLoader();
-
           case PaymentTypeStateStatus.addOrUpdatePayment:
             hideLoader();
             _showAddOrUpdatePayment();
-
           case PaymentTypeStateStatus.saved:
             hideLoader();
             Navigator.of(context, rootNavigator: true).pop();

@@ -44,12 +44,11 @@ class _LoginPageState extends State<LoginPage>
         case LoginStateStatus.error:
           hideLoader();
           showError(_controller.errorMessage ?? 'Erro ao realizar login');
-
         case LoginStateStatus.success:
           hideLoader();
           Modular.to.navigate('/');
-
         case LoginStateStatus.initial:
+          break;
         case LoginStateStatus.loading:
           showLoader();
       }
