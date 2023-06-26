@@ -14,7 +14,7 @@ final _theme = ThemeData(
     contentPadding: const EdgeInsets.all(20),
     filled: true,
     fillColor: Colors.white,
-    hoverColor: Colors.white,
+    hoverColor: Colors.transparent,
     focusedBorder: _defaultInputBorder,
     enabledBorder: _defaultInputBorder,
     border: _defaultInputBorder,

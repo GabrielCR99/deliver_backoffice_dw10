@@ -7,7 +7,12 @@ import '../../services/auth/login_service.dart';
 
 part 'login_controller.g.dart';
 
-enum LoginStateStatus { initial, loading, success, error }
+enum LoginStateStatus {
+  initial,
+  loading,
+  success,
+  error,
+}
 
 final class LoginController = LoginControllerBase with _$LoginController;
 

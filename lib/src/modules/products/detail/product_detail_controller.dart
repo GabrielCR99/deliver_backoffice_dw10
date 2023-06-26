@@ -110,6 +110,8 @@ abstract interface class ProductDetailControllerBase with Store {
       if (_productModel != null && _productModel!.id != null) {
         await _productsRepository.delete(_productModel!.id!);
         _status = ProductDetailStateStatus.deleted;
+
+        return;
       }
       await Future<void>.delayed(Duration.zero);
       _status = ProductDetailStateStatus.deleted;

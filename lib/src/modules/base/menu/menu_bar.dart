@@ -51,7 +51,7 @@ class _MenuBarState extends State<MenuBar> with HistoryBackListener<MenuBar> {
           const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
-              itemBuilder: (context, index) {
+              itemBuilder: (_, index) {
                 final menu = Menu.values[index];
 
                 return MenuButton(

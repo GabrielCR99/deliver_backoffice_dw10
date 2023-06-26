@@ -40,8 +40,6 @@ class _ProductDetailPageState extends State<ProductDetailPage>
     _controller = context.read<ProductDetailController>();
     scheduleMicrotask(() {
       reaction((_) => _controller.status, (status) {
-        debugPrint('Status: $status');
-
         switch (status) {
           case ProductDetailStateStatus.initial:
             break;
