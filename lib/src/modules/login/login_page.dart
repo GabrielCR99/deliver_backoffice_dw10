@@ -19,7 +19,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage>
     with Loader<LoginPage>, Messages<LoginPage> {
-  late final _controller = context.read<LoginController>();
+  late final LoginController _controller;
   final _emailEC = TextEditingController();
   final _passwordEC = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -39,6 +39,7 @@ class _LoginPageState extends State<LoginPage>
   @override
   void initState() {
     super.initState();
+    _controller = context.read<LoginController>();
     _disposer = reaction((_) => _controller.loginStatus, (status) {
       switch (status) {
         case LoginStateStatus.error:

@@ -21,7 +21,7 @@ class OrderPage extends StatefulWidget {
 
 class _OrderPageState extends State<OrderPage>
     with Loader<OrderPage>, Messages<OrderPage> {
-  late final _controller = context.read<OrderController>();
+  late final OrderController _controller;
   late final ReactionDisposer _disposer;
 
   void _showOrderDetail() => showDialog<void>(
@@ -35,6 +35,7 @@ class _OrderPageState extends State<OrderPage>
   @override
   void initState() {
     super.initState();
+    _controller = context.read<OrderController>();
     scheduleMicrotask(() {
       _disposer = reaction((_) => _controller.status, (status) {
         switch (status) {

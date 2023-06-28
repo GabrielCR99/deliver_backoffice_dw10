@@ -21,7 +21,7 @@ class PaymentTypePage extends StatefulWidget {
 
 class _PaymentTypePageState extends State<PaymentTypePage>
     with Loader<PaymentTypePage>, Messages<PaymentTypePage> {
-  late final _controller = context.read<PaymentTypeController>();
+  late final PaymentTypeController _controller;
   final _disposers = <ReactionDisposer>[];
 
   void _showAddOrUpdatePayment() => showDialog<void>(
@@ -45,6 +45,7 @@ class _PaymentTypePageState extends State<PaymentTypePage>
   @override
   void initState() {
     super.initState();
+    _controller = context.read<PaymentTypeController>();
     scheduleMicrotask(() {
       final filterDisposer = reaction(
         (_) => _controller.filterEnabled,

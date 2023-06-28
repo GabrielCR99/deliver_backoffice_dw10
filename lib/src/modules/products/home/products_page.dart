@@ -21,13 +21,14 @@ class ProductsPage extends StatefulWidget {
 
 class _ProductsPageState extends State<ProductsPage>
     with Loader<ProductsPage>, Messages<ProductsPage> {
-  late final _controller = context.read<ProductsController>();
+  late final ProductsController _controller;
   final _debouncer = Debouncer(milliseconds: 500);
   late final ReactionDisposer _disposer;
 
   @override
   void initState() {
     super.initState();
+    _controller = context.read<ProductsController>();
     scheduleMicrotask(() {
       _disposer = reaction((_) => _controller.status, (status) async {
         switch (status) {
