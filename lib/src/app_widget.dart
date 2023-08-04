@@ -8,7 +8,7 @@ import 'core/ui/styles/text_styles.dart';
 
 part '../src/core/ui/theme/theme_config.dart';
 
-class AppWidget extends StatelessWidget {
+final class AppWidget extends StatelessWidget {
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   AppWidget({super.key}) {
@@ -22,8 +22,7 @@ class AppWidget extends StatelessWidget {
       ..setNavigatorKey(_navigatorKey);
 
     return MaterialApp.router(
-      routeInformationParser: Modular.routeInformationParser,
-      routerDelegate: Modular.routerDelegate,
+      routerConfig: Modular.routerConfig,
       title: 'Vakinha Backoffice',
       theme: _theme,
     );

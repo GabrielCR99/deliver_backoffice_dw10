@@ -7,21 +7,23 @@ import 'home/products_page.dart';
 
 final class ProductsModule extends Module {
   @override
-  List<Bind> get binds => [
-        Bind.lazySingleton((i) => ProductsController(productsRepository: i())),
-        Bind.lazySingleton(
-          (i) => ProductDetailController(productsRepository: i()),
-        ),
-      ];
+  void binds(Injector i) {
+    super.binds(i);
+    i
+      ..addLazySingleton<ProductsController>(ProductsController.new)
+      ..addLazySingleton<ProductDetailController>(ProductDetailController.new);
+  }
 
   @override
-  List<ModularRoute> get routes => [
-        ChildRoute<ProductsPage>('/', child: (_, __) => const ProductsPage()),
-        ChildRoute<ProductDetailPage>(
-          '/product-detail',
-          child: (_, args) => ProductDetailPage(
-            productId: int.tryParse(args.queryParams['id'] ?? ''),
-          ),
+  void routes(RouteManager r) {
+    super.routes(r);
+    r
+      ..child('/', child: (_) => const ProductsPage())
+      ..child(
+        '/product-detail',
+        child: (_) => ProductDetailPage(
+          productId: int.tryParse(r.args.queryParams['id'] ?? ''),
         ),
-      ];
+      );
+  }
 }

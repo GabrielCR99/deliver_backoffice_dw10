@@ -37,9 +37,7 @@ abstract interface class PaymentTypeControllerBase with Store {
 
   final PaymentTypeRepository _paymentTypeRepository;
 
-  PaymentTypeControllerBase({
-    required PaymentTypeRepository paymentTypeRepository,
-  }) : _paymentTypeRepository = paymentTypeRepository;
+  PaymentTypeControllerBase(this._paymentTypeRepository);
 
   set filter(bool? enabled) => _filterEnabled = enabled;
 

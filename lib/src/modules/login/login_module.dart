@@ -9,15 +9,17 @@ import 'login_page.dart';
 
 final class LoginModule extends Module {
   @override
-  List<Bind> get binds => [
-        Bind.lazySingleton<AuthRepository>((i) => AuthRepositoryImpl(dio: i())),
-        Bind.lazySingleton<LoginService>(
-          (i) => LoginServiceImpl(authRepository: i(), storage: i()),
-        ),
-        Bind.lazySingleton((i) => LoginController(loginService: i())),
-      ];
+  void binds(Injector i) {
+    super.binds(i);
+    i
+      ..addLazySingleton<AuthRepository>(AuthRepositoryImpl.new)
+      ..addSingleton<LoginService>(LoginServiceImpl.new)
+      ..addLazySingleton<LoginController>(LoginController.new);
+  }
 
   @override
-  List<ModularRoute> get routes =>
-      [ChildRoute<LoginPage>('/', child: (_, __) => const LoginPage())];
+  void routes(RouteManager r) {
+    super.routes(r);
+    r.child('/', child: (_) => const LoginPage());
+  }
 }

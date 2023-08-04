@@ -25,8 +25,7 @@ abstract interface class LoginControllerBase with Store {
 
   final LoginService _loginService;
 
-  LoginControllerBase({required LoginService loginService})
-      : _loginService = loginService;
+  LoginControllerBase(this._loginService);
 
   @action
   Future<void> login({required String email, required String password}) async {

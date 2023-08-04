@@ -37,8 +37,7 @@ abstract interface class ProductDetailControllerBase with Store {
   @readonly
   ProductModel? _productModel;
 
-  ProductDetailControllerBase({required ProductsRepository productsRepository})
-      : _productsRepository = productsRepository;
+  ProductDetailControllerBase(this._productsRepository);
 
   @action
   Future<void> uploadImageProduct(Uint8List file, String fileName) async {

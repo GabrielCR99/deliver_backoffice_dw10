@@ -9,19 +9,21 @@ import 'modules/products/products_module.dart';
 
 final class AppModule extends Module {
   @override
-  List<ModularRoute> get routes => [
-        ModuleRoute<LoginModule>('/login', module: LoginModule()),
-        ChildRoute<BaseLayout>(
-          '/',
-          transition: TransitionType.noTransition,
-          children: [
-            ModuleRoute('/payment-type', module: PaymentTypeModule()),
-            ModuleRoute('/products', module: ProductsModule()),
-            ModuleRoute('/orders', module: OrderModule()),
-          ],
-          child: (_, __) => const BaseLayout(body: RouterOutlet()),
-        ),
-      ];
+  void routes(RouteManager r) {
+    super.routes(r);
+    r
+      ..module('/login', module: LoginModule())
+      ..child(
+        '/',
+        transition: TransitionType.noTransition,
+        children: [
+          ModuleRoute('/payment-type', module: PaymentTypeModule()),
+          ModuleRoute('/products', module: ProductsModule()),
+          ModuleRoute('/orders', module: OrderModule()),
+        ],
+        child: (_) => const BaseLayout(body: RouterOutlet()),
+      );
+  }
 
   @override
   List<Module> get imports => [CoreModule()];

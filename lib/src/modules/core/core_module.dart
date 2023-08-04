@@ -12,20 +12,13 @@ import '../../repositories/user/user_repository_impl.dart';
 
 final class CoreModule extends Module {
   @override
-  List<Bind> get binds => [
-        Bind.lazySingleton<Storage>((i) => SessionStorage(), export: true),
-        Bind.lazySingleton((i) => CustomDio(storage: i()), export: true),
-        Bind.lazySingleton<PaymentTypeRepository>(
-          (i) => PaymentTypeRepositoryImpl(dio: i()),
-          export: true,
-        ),
-        Bind.lazySingleton<ProductsRepository>(
-          (i) => ProductsRepositoryImpl(dio: i()),
-          export: true,
-        ),
-        Bind.lazySingleton<UserRepository>(
-          (i) => UserRepositoryImpl(dio: i()),
-          export: true,
-        ),
-      ];
+  void exportedBinds(Injector i) {
+    super.exportedBinds(i);
+    i
+      ..addLazySingleton<Storage>(SessionStorage.new)
+      ..addLazySingleton<CustomDio>(CustomDio.new)
+      ..addLazySingleton<PaymentTypeRepository>(PaymentTypeRepositoryImpl.new)
+      ..addLazySingleton<ProductsRepository>(ProductsRepositoryImpl.new)
+      ..addLazySingleton<UserRepository>(UserRepositoryImpl.new);
+  }
 }

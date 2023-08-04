@@ -42,11 +42,7 @@ abstract interface class OrderControllerBase with Store {
   final OrderRepository _orderRepository;
   final GetOrderById _getOrderById;
 
-  OrderControllerBase({
-    required OrderRepository orderRepository,
-    required GetOrderById getOrderById,
-  })  : _orderRepository = orderRepository,
-        _getOrderById = getOrderById {
+  OrderControllerBase(this._orderRepository, this._getOrderById) {
     final todayNow = DateTime.now();
     _today = DateTime(todayNow.year, todayNow.month, todayNow.day);
   }

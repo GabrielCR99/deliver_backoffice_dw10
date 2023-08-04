@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
+
 import '../../core/exceptions/repository_exception.dart';
 import '../../core/rest_client/custom_dio.dart';
 import '../../models/orders/order_model.dart';
@@ -9,7 +11,7 @@ import 'order_repository.dart';
 final class OrderRepositoryImpl implements OrderRepository {
   final CustomDio _dio;
 
-  const OrderRepositoryImpl({required CustomDio dio}) : _dio = dio;
+  const OrderRepositoryImpl(this._dio);
 
   @override
   Future<void> changeStatus({
@@ -36,7 +38,7 @@ final class OrderRepositoryImpl implements OrderRepository {
     OrderStatus? status,
   ]) async {
     try {
-      final result = await _dio.auth().get<List<Object?>>(
+      final Response(:data) = await _dio.auth().get<List<Object?>>(
         '/orders',
         queryParameters: {
           'date': date.toIso8601String(),
@@ -44,7 +46,7 @@ final class OrderRepositoryImpl implements OrderRepository {
         },
       );
 
-      return result.data!
+      return data!
           .cast<Map<String, dynamic>>()
           .map<OrderModel>(OrderModel.fromMap)
           .toList();
@@ -61,10 +63,10 @@ final class OrderRepositoryImpl implements OrderRepository {
   @override
   Future<OrderModel> findById(int id) async {
     try {
-      final response =
+      final Response(:data) =
           await _dio.auth().get<Map<String, dynamic>>('/orders/$id');
 
-      return OrderModel.fromMap(response.data!);
+      return OrderModel.fromMap(data!);
     } catch (e, s) {
       log('Erro ao buscar pedido', error: e, stackTrace: s);
 

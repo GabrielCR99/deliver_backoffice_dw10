@@ -20,19 +20,16 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage>
     with Loader<LoginPage>, Messages<LoginPage> {
   late final LoginController _controller;
+  late final ReactionDisposer _disposer;
   final _emailEC = TextEditingController();
   final _passwordEC = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  late final ReactionDisposer _disposer;
 
   void _onPressedLogin() {
     final formValid = _formKey.currentState?.validate() ?? false;
 
     if (formValid) {
-      _controller.login(
-        email: _emailEC.text,
-        password: _passwordEC.text,
-      );
+      _controller.login(email: _emailEC.text, password: _passwordEC.text);
     }
   }
 
@@ -58,7 +55,7 @@ class _LoginPageState extends State<LoginPage>
 
   @override
   Widget build(BuildContext context) {
-    final screenShortesSide = context.shortestSide;
+    final screenShortestSide = context.shortestSide;
     final screenWidth = context.width;
 
     return Scaffold(
@@ -76,12 +73,12 @@ class _LoginPageState extends State<LoginPage>
                     fit: BoxFit.cover,
                   ),
                 ),
-                height: screenShortesSide * 0.5,
+                height: screenShortestSide * 0.5,
               ),
             ),
             Container(
               padding: EdgeInsets.only(top: context.percentHeight(0.1)),
-              width: screenShortesSide * 0.5,
+              width: screenShortestSide * 0.5,
               child: Image.asset('assets/images/logo.png'),
             ),
             Center(

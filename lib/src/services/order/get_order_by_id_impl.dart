@@ -13,33 +13,35 @@ final class GetOrderByIdImpl implements GetOrderById {
   final UserRepository _userRepository;
   final ProductsRepository _productsRepository;
 
-  const GetOrderByIdImpl({
-    required PaymentTypeRepository paymentTypeRepository,
-    required UserRepository userRepository,
-    required ProductsRepository productsRepository,
-  })  : _paymentTypeRepository = paymentTypeRepository,
-        _userRepository = userRepository,
-        _productsRepository = productsRepository;
+  const GetOrderByIdImpl(
+    this._paymentTypeRepository,
+    this._userRepository,
+    this._productsRepository,
+  );
 
   @override
   Future<OrderDto> call(OrderModel order) async => _orderDtoParser(order);
 
   Future<OrderDto> _orderDtoParser(OrderModel order) async {
-    final paymentType = _paymentTypeRepository.findById(order.paymentTypeId);
-    final user = _userRepository.findById(order.userId);
-    final products = _orderProductsParser(order);
-
-    final responses = await Future.wait([paymentType, user, products]);
+    final [
+      paymentType as PaymentTypeModel,
+      user as UserModel,
+      products as List<OrderProductDto>
+    ] = await Future.wait([
+      _paymentTypeRepository.findById(order.paymentTypeId),
+      _userRepository.findById(order.userId),
+      _orderProductsParser(order),
+    ]);
 
     return OrderDto(
       id: order.id,
       date: order.date,
       status: order.status,
-      products: responses[2] as List<OrderProductDto>,
-      user: responses[1] as UserModel,
+      products: products,
+      user: user,
       address: order.address,
       cpf: order.cpf,
-      paymentType: responses.first as PaymentTypeModel,
+      paymentType: paymentType,
     );
   }
 

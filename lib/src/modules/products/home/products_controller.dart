@@ -33,8 +33,7 @@ abstract interface class ProductsControllerBase with Store {
 
   final ProductsRepository _productsRepository;
 
-  ProductsControllerBase({required ProductsRepository productsRepository})
-      : _productsRepository = productsRepository;
+  ProductsControllerBase(this._productsRepository);
 
   @action
   Future<void> getProducts() async {

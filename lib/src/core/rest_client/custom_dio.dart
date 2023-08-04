@@ -8,7 +8,7 @@ import 'interceptors/auth_interceptor.dart';
 final class CustomDio extends DioForBrowser {
   late final AuthInterceptor _authInterceptor;
 
-  CustomDio({required Storage storage})
+  CustomDio(Storage storage)
       : super(
           BaseOptions(
             connectTimeout: const Duration(seconds: 5),

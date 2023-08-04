@@ -9,23 +9,17 @@ import 'order_page.dart';
 
 final class OrderModule extends Module {
   @override
-  List<Bind> get binds => [
-        Bind.lazySingleton<OrderRepository>(
-          (i) => OrderRepositoryImpl(dio: i()),
-        ),
-        Bind.lazySingleton<GetOrderById>(
-          (i) => GetOrderByIdImpl(
-            paymentTypeRepository: i(),
-            userRepository: i(),
-            productsRepository: i(),
-          ),
-        ),
-        Bind.lazySingleton(
-          (i) => OrderController(orderRepository: i(), getOrderById: i()),
-        ),
-      ];
+  void binds(Injector i) {
+    super.binds(i);
+    i
+      ..addLazySingleton<OrderRepository>(OrderRepositoryImpl.new)
+      ..addLazySingleton<GetOrderById>(GetOrderByIdImpl.new)
+      ..addLazySingleton<OrderController>(OrderController.new);
+  }
 
   @override
-  List<ModularRoute> get routes =>
-      [ChildRoute<OrderPage>('/', child: (_, __) => const OrderPage())];
+  void routes(RouteManager r) {
+    super.routes(r);
+    r.child('/', child: (_) => const OrderPage());
+  }
 }

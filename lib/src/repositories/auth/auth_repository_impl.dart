@@ -12,7 +12,7 @@ import 'auth_repository.dart';
 final class AuthRepositoryImpl implements AuthRepository {
   final CustomDio _dio;
 
-  const AuthRepositoryImpl({required CustomDio dio}) : _dio = dio;
+  const AuthRepositoryImpl(this._dio);
 
   @override
   Future<String> login({
@@ -20,7 +20,7 @@ final class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) async {
     try {
-      final result = await _dio.unauth().post<Map<String, dynamic>>(
+      final Response(:data) = await _dio.unauth().post<Map<String, dynamic>>(
         '/auth',
         data: {
           'email': email,
@@ -29,7 +29,7 @@ final class AuthRepositoryImpl implements AuthRepository {
         },
       );
 
-      return result.data?['access_token'] as String;
+      return data?['access_token'] as String;
     } on DioException catch (e, s) {
       if (e.response?.statusCode == 403) {
         log('Usuário ou senha inválidos', error: e, stackTrace: s);

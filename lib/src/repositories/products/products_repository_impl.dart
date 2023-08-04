@@ -11,7 +11,7 @@ import 'products_repository.dart';
 final class ProductsRepositoryImpl implements ProductsRepository {
   final CustomDio _dio;
 
-  const ProductsRepositoryImpl({required CustomDio dio}) : _dio = dio;
+  const ProductsRepositoryImpl(this._dio);
 
   @override
   Future<void> delete(int id) async {
@@ -34,7 +34,7 @@ final class ProductsRepositoryImpl implements ProductsRepository {
   @override
   Future<List<ProductModel>> findAll({String? name}) async {
     try {
-      final result = await _dio.auth().get<List<Object?>>(
+      final Response(:data) = await _dio.auth().get<List<Object?>>(
         '/products',
         queryParameters: {
           if (name != null) 'name': name,
@@ -42,7 +42,7 @@ final class ProductsRepositoryImpl implements ProductsRepository {
         },
       );
 
-      return result.data!
+      return data!
           .cast<Map<String, dynamic>>()
           .map(ProductModel.fromMap)
           .toList();
@@ -59,10 +59,10 @@ final class ProductsRepositoryImpl implements ProductsRepository {
   @override
   Future<ProductModel> findById(int id) async {
     try {
-      final result =
+      final Response(:data) =
           await _dio.auth().get<Map<String, dynamic>>('/products/$id');
 
-      return ProductModel.fromMap(result.data!);
+      return ProductModel.fromMap(data!);
     } on DioException catch (e, s) {
       log('Erro ao buscar produto $id', error: e, stackTrace: s);
 
@@ -76,16 +76,16 @@ final class ProductsRepositoryImpl implements ProductsRepository {
   @override
   Future<void> save(ProductModel model) async {
     try {
-      final client = _dio.auth();
+      final CustomDio(:put, :post) = _dio.auth();
       final data = model.toMap();
 
       if (model.id != null) {
-        await client.put<void>('/products/${model.id}', data: data);
+        await put<void>('/products/${model.id}', data: data);
 
         return;
       }
 
-      await client.post<void>('/products', data: data);
+      await post<void>('/products', data: data);
     } on DioException catch (e, s) {
       log('Erro ao salvar produto', error: e, stackTrace: s);
 
@@ -99,15 +99,15 @@ final class ProductsRepositoryImpl implements ProductsRepository {
   @override
   Future<String> uploadImageProduct(Uint8List image, String name) async {
     try {
-      final formData = FormData.fromMap({
-        'file': MultipartFile.fromBytes(image, filename: name),
-      });
+      final formData = FormData.fromMap(
+        {'file': MultipartFile.fromBytes(image, filename: name)},
+      );
 
-      final response = await _dio
+      final Response(:data) = await _dio
           .auth()
           .post<Map<String, dynamic>>('/uploads', data: formData);
 
-      return response.data!['url'] as String;
+      return data!['url'] as String;
     } on DioException catch (e, s) {
       log('Erro ao fazer upload da imagem', error: e, stackTrace: s);
 
