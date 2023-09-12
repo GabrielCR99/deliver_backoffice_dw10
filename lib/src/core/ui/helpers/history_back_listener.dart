@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
@@ -25,7 +23,7 @@ mixin HistoryBackListener<T extends StatefulWidget> on State<T> {
     super.dispose();
   }
 
-  void onHistoryBack(Event _) {
+  void onHistoryBack(Object _) {
     return;
   }
 }

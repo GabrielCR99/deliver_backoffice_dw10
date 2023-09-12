@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -20,7 +18,7 @@ class _MenuBarState extends State<MenuBar> with HistoryBackListener<MenuBar> {
   var collapsed = false;
 
   @override
-  void onHistoryBack(Event event) =>
+  void onHistoryBack(Object _) =>
       setState(() => selectedMenu = Menu.findByPath(Modular.to.path));
 
   @override
