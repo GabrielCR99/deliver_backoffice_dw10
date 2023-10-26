@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/ui/widgets/base_header.dart';
 import '../payment_type_controller.dart';
 
-class PaymentTypeHeader extends StatefulWidget {
+final class PaymentTypeHeader extends StatefulWidget {
   final PaymentTypeController controller;
 
   const PaymentTypeHeader({required this.controller, super.key});
@@ -12,7 +12,7 @@ class PaymentTypeHeader extends StatefulWidget {
   State<PaymentTypeHeader> createState() => _PaymentTypeHeaderState();
 }
 
-class _PaymentTypeHeaderState extends State<PaymentTypeHeader> {
+final class _PaymentTypeHeaderState extends State<PaymentTypeHeader> {
   bool? enabled;
 
   @override

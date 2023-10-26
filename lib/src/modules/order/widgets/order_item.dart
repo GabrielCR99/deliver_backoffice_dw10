@@ -5,7 +5,7 @@ import '../../../core/ui/styles/text_styles.dart';
 import '../../../models/orders/order_model.dart';
 import '../order_controller.dart';
 
-class OrderItem extends StatelessWidget {
+final class OrderItem extends StatelessWidget {
   final OrderModel order;
 
   const OrderItem({required this.order, super.key});

@@ -7,7 +7,7 @@ import '../../../../core/ui/styles/text_styles.dart';
 import '../../../../models/product_model.dart';
 import '../products_controller.dart';
 
-class ProductItem extends StatelessWidget {
+final class ProductItem extends StatelessWidget {
   final ProductModel product;
 
   const ProductItem({required this.product, super.key});

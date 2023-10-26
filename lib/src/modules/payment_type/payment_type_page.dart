@@ -12,14 +12,14 @@ import 'widgets/payment_type_form/payment_type_form.dart';
 import 'widgets/payment_type_header.dart';
 import 'widgets/payment_type_item.dart';
 
-class PaymentTypePage extends StatefulWidget {
+final class PaymentTypePage extends StatefulWidget {
   const PaymentTypePage({super.key});
 
   @override
   State<PaymentTypePage> createState() => _PaymentTypePageState();
 }
 
-class _PaymentTypePageState extends State<PaymentTypePage>
+final class _PaymentTypePageState extends State<PaymentTypePage>
     with Loader<PaymentTypePage>, Messages<PaymentTypePage> {
   late final PaymentTypeController _controller;
   final _disposers = <ReactionDisposer>[];

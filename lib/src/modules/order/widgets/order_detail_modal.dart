@@ -9,7 +9,7 @@ import '../detail/widgets/order_info_tile.dart';
 import '../detail/widgets/order_product_item.dart';
 import '../order_controller.dart';
 
-class OrderDetailModal extends StatelessWidget {
+final class OrderDetailModal extends StatelessWidget {
   final OrderController controller;
   final OrderDto order;
 

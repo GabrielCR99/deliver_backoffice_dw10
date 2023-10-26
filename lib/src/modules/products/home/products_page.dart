@@ -12,14 +12,14 @@ import '../../../core/ui/widgets/base_header.dart';
 import 'products_controller.dart';
 import 'widgets/product_item.dart';
 
-class ProductsPage extends StatefulWidget {
+final class ProductsPage extends StatefulWidget {
   const ProductsPage({super.key});
 
   @override
   State<ProductsPage> createState() => _ProductsPageState();
 }
 
-class _ProductsPageState extends State<ProductsPage>
+final class _ProductsPageState extends State<ProductsPage>
     with Loader<ProductsPage>, Messages<ProductsPage> {
   late final ProductsController _controller;
   final _debouncer = Debouncer(milliseconds: 500);

@@ -17,7 +17,7 @@ import '../../../core/ui/helpers/upload_html_helper.dart';
 import '../../../core/ui/styles/text_styles.dart';
 import 'product_detail_controller.dart';
 
-class ProductDetailPage extends StatefulWidget {
+final class ProductDetailPage extends StatefulWidget {
   final int? productId;
 
   const ProductDetailPage({this.productId, super.key});
@@ -26,7 +26,7 @@ class ProductDetailPage extends StatefulWidget {
   State<ProductDetailPage> createState() => _ProductDetailPageState();
 }
 
-class _ProductDetailPageState extends State<ProductDetailPage>
+final class _ProductDetailPageState extends State<ProductDetailPage>
     with Loader<ProductDetailPage>, Messages<ProductDetailPage> {
   late final ProductDetailController _controller;
   final _nameEC = TextEditingController();

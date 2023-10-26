@@ -10,14 +10,14 @@ import '../../core/ui/styles/app_colors.dart';
 import '../../core/ui/styles/text_styles.dart';
 import 'login_controller.dart';
 
-class LoginPage extends StatefulWidget {
+final class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage>
+final class _LoginPageState extends State<LoginPage>
     with Loader<LoginPage>, Messages<LoginPage> {
   late final LoginController _controller;
   late final ReactionDisposer _disposer;

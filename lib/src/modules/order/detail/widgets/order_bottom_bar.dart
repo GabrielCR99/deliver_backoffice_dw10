@@ -5,7 +5,7 @@ import '../../../../dtos/order/order_dto.dart';
 import '../../../../models/orders/order_status.dart';
 import '../../order_controller.dart';
 
-class OrderBottomBar extends StatelessWidget {
+final class OrderBottomBar extends StatelessWidget {
   final OrderController controller;
   final OrderDto order;
 
@@ -59,7 +59,7 @@ class OrderBottomBar extends StatelessWidget {
   }
 }
 
-class _OrderBottomBarButtom extends StatelessWidget {
+final class _OrderBottomBarButtom extends StatelessWidget {
   final BorderRadius borderRadius;
   final Color color;
   final String image;

@@ -4,7 +4,7 @@ import '../../../core/ui/widgets/base_header.dart';
 import '../../../models/orders/order_status.dart';
 import '../order_controller.dart';
 
-class OrderHeader extends StatefulWidget {
+final class OrderHeader extends StatefulWidget {
   final OrderController controller;
   const OrderHeader({required this.controller, super.key});
 
@@ -12,7 +12,7 @@ class OrderHeader extends StatefulWidget {
   State<OrderHeader> createState() => _OrderHeaderState();
 }
 
-class _OrderHeaderState extends State<OrderHeader> {
+final class _OrderHeaderState extends State<OrderHeader> {
   OrderStatus? _selectedStatus;
 
   @override

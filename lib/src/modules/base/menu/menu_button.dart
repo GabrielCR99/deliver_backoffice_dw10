@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/ui/styles/text_styles.dart';
 import 'menu_enum.dart';
 
-class MenuButton extends StatelessWidget {
+final class MenuButton extends StatelessWidget {
   final Menu menu;
   final ValueChanged<Menu> onPressed;
   final Menu? selectedMenu;

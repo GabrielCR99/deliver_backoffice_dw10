@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/ui/styles/text_styles.dart';
 
-class OrderInfoTile extends StatelessWidget {
+final class OrderInfoTile extends StatelessWidget {
   final String label;
   final String info;
 

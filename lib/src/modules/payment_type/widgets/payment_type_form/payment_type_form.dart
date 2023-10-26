@@ -6,7 +6,7 @@ import '../../../../core/ui/styles/text_styles.dart';
 import '../../../../models/payment_type_model.dart';
 import '../../payment_type_controller.dart';
 
-class PaymentTypeForm extends StatefulWidget {
+final class PaymentTypeForm extends StatefulWidget {
   final PaymentTypeModel? model;
   final PaymentTypeController controller;
 
@@ -20,7 +20,7 @@ class PaymentTypeForm extends StatefulWidget {
   State<PaymentTypeForm> createState() => _PaymentTypeFormState();
 }
 
-class _PaymentTypeFormState extends State<PaymentTypeForm> {
+final class _PaymentTypeFormState extends State<PaymentTypeForm> {
   final _nameEC = TextEditingController();
   final _acronymEC = TextEditingController();
   final _formKey = GlobalKey<FormState>();

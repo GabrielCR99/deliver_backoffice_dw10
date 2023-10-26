@@ -4,7 +4,7 @@ import '../../../../core/extensions/formatter_extension.dart';
 import '../../../../core/ui/styles/text_styles.dart';
 import '../../../../dtos/order/order_product_dto.dart';
 
-class OrderProductItem extends StatelessWidget {
+final class OrderProductItem extends StatelessWidget {
   final OrderProductDto product;
 
   const OrderProductItem({required this.product, super.key});

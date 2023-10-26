@@ -12,14 +12,14 @@ import 'widgets/order_detail_modal.dart';
 import 'widgets/order_header.dart';
 import 'widgets/order_item.dart';
 
-class OrderPage extends StatefulWidget {
+final class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
 
   @override
   State<OrderPage> createState() => _OrderPageState();
 }
 
-class _OrderPageState extends State<OrderPage>
+final class _OrderPageState extends State<OrderPage>
     with Loader<OrderPage>, Messages<OrderPage> {
   late final OrderController _controller;
   late final ReactionDisposer _disposer;

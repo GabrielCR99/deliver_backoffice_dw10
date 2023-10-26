@@ -6,14 +6,15 @@ import '../../../core/ui/helpers/size_extensions.dart';
 import 'menu_button.dart';
 import 'menu_enum.dart';
 
-class MenuBar extends StatefulWidget {
+final class MenuBar extends StatefulWidget {
   const MenuBar({super.key});
 
   @override
   State<MenuBar> createState() => _MenuBarState();
 }
 
-class _MenuBarState extends State<MenuBar> with HistoryBackListener<MenuBar> {
+final class _MenuBarState extends State<MenuBar>
+    with HistoryBackListener<MenuBar> {
   Menu? selectedMenu;
   var collapsed = false;
 
