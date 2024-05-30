@@ -33,7 +33,7 @@ final class GetOrderByIdImpl implements GetOrderById {
       _orderProductsParser(order),
     ]);
 
-    return OrderDto(
+    return (
       id: order.id,
       date: order.date,
       status: order.status,
@@ -54,7 +54,7 @@ final class GetOrderByIdImpl implements GetOrderById {
 
     for (var i = 0; i < order.products.length; i++) {
       final orderProduct = order.products[i];
-      final productDto = OrderProductDto(
+      final productDto = (
         product: products[i],
         amount: orderProduct.amount,
         totalPrice: orderProduct.totalPrice,

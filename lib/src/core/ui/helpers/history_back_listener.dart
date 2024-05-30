@@ -23,7 +23,5 @@ mixin HistoryBackListener<T extends StatefulWidget> on State<T> {
     super.dispose();
   }
 
-  void onHistoryBack(Object _) {
-    return;
-  }
+  void onHistoryBack(Object _) => const ();
 }
