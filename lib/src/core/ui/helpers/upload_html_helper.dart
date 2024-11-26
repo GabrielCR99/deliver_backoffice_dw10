@@ -19,7 +19,7 @@ final class UploadHtmlHelper {
       final file = files.first;
       final FileReader(
         :onLoadEnd,
-        :result
+        :result,
       ) = FileReader()..readAsArrayBuffer(file);
 
       onLoadEnd.listen((_) {
