@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -46,7 +44,7 @@ final class _PaymentTypePageState extends State<PaymentTypePage>
   void initState() {
     super.initState();
     _controller = context.read<PaymentTypeController>();
-    scheduleMicrotask(() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       final filterDisposer = reaction(
         (_) => _controller.filterEnabled,
         (_) => _controller.getPayments(),

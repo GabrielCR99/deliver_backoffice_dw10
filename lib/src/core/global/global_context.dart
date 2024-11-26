@@ -21,7 +21,7 @@ final class GlobalContext {
   void loginExpired() {
     Modular.get<Storage>().clearData();
     ScaffoldMessenger.of(_navigatorKey.currentContext!).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: AwesomeSnackbarContent(
           title: 'Login expirado',
           message: 'Login expirado, faça o login novamente',
@@ -29,7 +29,7 @@ final class GlobalContext {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        padding: const EdgeInsets.only(top: 72),
+        padding: EdgeInsets.only(top: 72),
         behavior: SnackBarBehavior.floating,
       ),
     );

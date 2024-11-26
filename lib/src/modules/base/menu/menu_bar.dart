@@ -19,13 +19,27 @@ final class _MenuBarState extends State<MenuBar>
   var collapsed = false;
 
   @override
-  void onHistoryBack(Object _) =>
-      setState(() => selectedMenu = Menu.findByPath(Modular.to.path));
+  void onHistoryBack() {
+    final newMenu = Menu.findByPath(Modular.to.path);
+    if (newMenu != null && mounted) {
+      setState(() => selectedMenu = newMenu);
+    } else {
+      // Handle the case where no menu is found
+      debugPrint('No menu found for path: ${Modular.to.path}');
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     selectedMenu = Menu.findByPath(Modular.to.path);
+    // Check if selectedMenu is null and handle it if necessary
+    if (selectedMenu == null) {
+      debugPrint('Initial selectedMenu is null for path: ${Modular.to.path}');
+      // Handle the null case, e.g., set a default menu
+      // selectedMenu = Menu.products;
+      // Modular.to.navigate(selectedMenu!.route);
+    }
   }
 
   @override

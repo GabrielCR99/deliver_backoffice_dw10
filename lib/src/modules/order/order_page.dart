@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -36,7 +34,7 @@ final class _OrderPageState extends State<OrderPage>
   void initState() {
     super.initState();
     _controller = context.read<OrderController>();
-    scheduleMicrotask(() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _disposer = reaction((_) => _controller.status, (status) {
         switch (status) {
           case OrderStateStatus.initial:

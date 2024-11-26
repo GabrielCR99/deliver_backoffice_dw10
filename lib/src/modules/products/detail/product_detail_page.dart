@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,7 +36,7 @@ final class _ProductDetailPageState extends State<ProductDetailPage>
   void initState() {
     super.initState();
     _controller = context.read<ProductDetailController>();
-    scheduleMicrotask(() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       reaction((_) => _controller.status, (status) {
         switch (status) {
           case ProductDetailStateStatus.initial:

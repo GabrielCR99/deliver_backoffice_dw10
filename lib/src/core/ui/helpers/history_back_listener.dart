@@ -1,29 +1,34 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
-mixin HistoryBackListener<T extends StatefulWidget> on State<T> {
+base mixin HistoryBackListener<T extends StatefulWidget> on State<T> {
   final _location = const BrowserPlatformLocation();
+  var _isListenerAdded = false;
 
   @override
   void initState() {
     super.initState();
-    _location.addPopStateListener((event) async {
-      onHistoryBack(event);
-      await Future<void>.delayed(const Duration(milliseconds: 200), () {
-        if (mounted) {
-          onHistoryBack(event);
-        }
+    if (!_isListenerAdded) {
+      _location.addPopStateListener((event) async {
+        _isListenerAdded = true;
+        onHistoryBack();
+        await Future<void>.delayed(const Duration(milliseconds: 250), () {
+          if (mounted) {
+            onHistoryBack();
+          }
+        });
       });
-    });
+    }
   }
 
   @override
   void dispose() {
-    _location.removePopStateListener(onHistoryBack);
+    if (_isListenerAdded) {
+      _location.removePopStateListener((_) => onHistoryBack());
+      _isListenerAdded = false;
+    }
     super.dispose();
   }
 
-  void onHistoryBack(Object _) {
-    return;
-  }
+  void onHistoryBack();
 }

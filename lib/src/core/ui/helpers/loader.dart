@@ -20,15 +20,21 @@ mixin Loader<T extends StatefulWidget> on State<T> {
   }
 
   void hideLoader() {
+    final navigator = Navigator.of(context, rootNavigator: true);
     if (_isOpen) {
       _isOpen = false;
-      Navigator.of(context, rootNavigator: true).pop();
+
+      if (navigator.canPop()) {
+        navigator.pop<void>();
+      }
     }
   }
 
   @override
   void dispose() {
-    hideLoader();
+    if (_isOpen) {
+      _isOpen = false;
+    }
     super.dispose();
   }
 }
